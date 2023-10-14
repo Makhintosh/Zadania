@@ -1,6 +1,14 @@
-FROM winamd64/python
-WORKDIR /praktyki-wp-2023-Makhintosh
-COPY . /praktyki-wp-2023-Makhintosh
+# Wybierz obraz bazowy
+FROM python:3.10-slim
+
+# Skopiuj zawartość aktualnego katalogu do katalogu /app wewnątrz kontenera
+COPY . /app
+
+# Ustaw katalog roboczy na /app
+WORKDIR /app
+
+# Instaluj zależności
 RUN pip install -r requirements.txt
-RUN pip install pyinstaller
-CMD [ "pyinstaller", "./program.py", "-F" ]
+
+# Wykonaj konwersję do pliku .exe
+RUN pyinstaller --onefile program.py
